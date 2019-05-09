@@ -26,18 +26,14 @@ void main(void){
     
     // Update the position.
     if (age < timestep){
-        // Reset position if particle just died
         pos = origPos;
     } else{
-        // Default fractal value, no influence
+        
         vec2 fractal = vec2(1.0,1.0);
         
-        // If particle is within window bounds => fractal bounds
         if (pos.x > 0.0 && pos.x < 1.0 && pos.y > 0.0 && pos.y < 1.0){
-            // Get fractal value [-1,1] for X on r and Y on g.
             fractal = texture( fractalData, vec2(pos.x*screen.x,pos.y*screen.y) ).rg;
             
-            // Dampen effect of fractal on parts of phase 1
             if (phase1Fractal == 1 && phase == 1){
                 fractal += 1;
                 fractal *= 0.5;
@@ -46,9 +42,7 @@ void main(void){
             
         }
         
-        // Update positions with velocities
         if (phase == 1 && phase1Fractal == 0) {
-            // No fractal effect
             pos += vel * timestep * velocityScale;
         } else{
             pos += vel * fractal * timestep * velocityScale;
