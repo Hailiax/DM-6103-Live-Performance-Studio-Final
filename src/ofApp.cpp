@@ -3,7 +3,13 @@
 //--------------------------------------------------------------
 
 //
-// Note: there are computer specific settings for: OpenGL 3, SIMD 4.1, and Apple Clang
+// Note: there are computer specific settings for: OpenGL 3, SIMD 4.1, and Apple Clang:
+// Ensure to use compiler setting -std=c++11, and the following for individual files:
+// FastNoiseSIMD_sse2.cpp: -msse2
+// FastNoiseSIMD_sse41.cpp: -msse4.1
+// FastNoiseSIMD_avx2.cpp: -mavx2
+// FastNoiseSIMD_avx512.cpp: -mavx512f
+
 // XY positions [0,1] are received from kinect/software via websockets on a local server
 //
 
@@ -439,7 +445,7 @@ void ofApp::draw(){
     frameMesh.draw();
     
     // log status of sockets
-    cout << ofApp::status << endl;
+//    cout << ofApp::status << endl;
     
     // Second half is drawn in ofSecond
 }
